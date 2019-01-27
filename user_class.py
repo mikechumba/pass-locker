@@ -16,6 +16,14 @@ class User:
 
       User.user_list.append(self)
 
+   def delete_user(self):
+
+      '''
+      This will delete saved user from user_list
+      '''
+
+      User.user_list.remove(self)
+
    def __init__(self,username,password):
 
       '''
