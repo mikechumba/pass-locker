@@ -1,4 +1,5 @@
-# folders to be ignored
-
-/__pycache__
+# IDE - VSCode
 .vscode/*
+
+# misc
+__pycache__
