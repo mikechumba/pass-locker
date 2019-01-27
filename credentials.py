@@ -33,6 +33,13 @@ class Credentials:
          if credential.account == string:
             return credential
 
+   @classmethod
+   def display_credentials(cls):
+      '''
+      method that returns the credentials
+      '''
+      return cls.credentials_list
+
 
    def __init__(self,account,acc_credentialsname,acc_password):
 
