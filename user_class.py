@@ -8,6 +8,14 @@ class User:
 
    user_list = []
 
+   def save_user(self):
+
+      '''
+      This method saves users into the user_list
+      '''
+
+      User.user_list.append(self)
+
    def __init__(self,username,password):
 
       '''
