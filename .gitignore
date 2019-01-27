@@ -1,3 +1,4 @@
-//add files or folder you want ignored //
+# folders to be ignored
 
 /__pycache__
+.vscode/*
