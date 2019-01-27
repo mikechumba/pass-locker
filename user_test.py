@@ -23,6 +23,15 @@ class TestUser(unittest.TestCase):
       self.new_user.save_user()
       self.assertEqual(len(User.user_list),1)
 
+   def test_save_multiple_contact(self):
+      '''
+      check if we can hold multiple user accounts
+      '''
+      self.new_user.save_user()
+      test_user = User("andrew","password") 
+      test_user.save_user()
+      self.assertEqual(len(User.user_list),2)
+
 
 if __name__ == '__main__':
    unittest.main()
