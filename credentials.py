@@ -22,6 +22,18 @@ class Credentials:
 
       Credentials.credentials_list.remove(self)
 
+
+   @classmethod
+   def find_credentials(cls,string):
+      '''
+      this method accesses credentials in credentials_list
+      '''
+
+      for credential in cls.credentials_list:
+         if credential.account == string:
+            return credential
+
+
    def __init__(self,account,acc_credentialsname,acc_password):
 
       '''
