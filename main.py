@@ -10,12 +10,47 @@ def create_user(username,password):
    new_user = User(username,password)
    return new_user
 
+def create_credentials(username,account,acc_username,acc_password):
+
+   '''
+   Function to create new Credentials
+   '''
+   new_credentials = Credentials(username,account,acc_username,acc_password)
+   return new_credentials
+
+def save_credentials(credentials):
+   '''
+   Saves created credentials
+   '''
+
+   Credentials.save_credentials(credentials)
+
+
+def save_user(user):
+   '''
+   Saves created credentials
+   '''
+   User.save_user(user)
+
+def disp_cred():
+   '''
+   Function to display saved credentials
+   '''
+
+   # return Credentials.display_credentials()
+
+   for credential in Credentials.credentials_list:
+      return f'''
+      ________________________________________
+      {credential.account.title()}  **  {credential.acc_credentialsname}  **  {credential.acc_password}
+      ________________________________________ 
+      '''
 
 def del_user(user):
    '''
    Function to delete a User
    '''
-   User.delete_user()
+   User.delete_user(user)
 
 
 # def find_user(number):
@@ -32,7 +67,7 @@ def generate_pass(length):
    pass_word = ''
 
    while (len(pass_word) < length):
-      index = random.randint(0,23)
+      index = random.randint(0,22)
       character = characters[index]
       pass_word += character
 
@@ -40,94 +75,117 @@ def generate_pass(length):
 
 def log_in():
 
-   print("Do you have a Password Locker account? Y/n")
+   program_run = 'run';
 
-   has_account = input()
 
-   if has_account == "Y":
-      print("This is Password Locker. Enter your username to proceed:")
+   while program_run == 'run':
+      print("""
+      --------------------------------
+      |  Welcome To Password Locker  |
+      --------------------------------
 
-      user_name = input()
+      Do you have a Password Locker account? Y/n
 
-      if user_name in User.user_list:
-         print(f"Enter the password for {user_name}:")
 
-         pass_word = getpass.getpass()
-         print(User.user_list)
-      else:
-         print("Oops! Seems like you don't have an account. Press esc to go to the main page.")
-
-   else:
-      print("""Create a new account
-      ________________________________________
       """)
-      print("Enter a username:")
 
-      user_name = input()
+      has_account = input()
 
-      if len(user_name) > 1:
-         print("Enter a password")
+      while True:
+         if has_account == "Y":
+            print("Enter your username to proceed:")
 
-         pass_word = getpass.getpass()
+            user_name = input()
 
-         print("Confirm password")
+            if user_name in User.user_list:
+               print(f"Enter the password for {user_name}:")
 
-         pass_confirm = getpass.getpass()
-
-         if pass_word == pass_confirm:
-            create_user(user_name,pass_word)
-
-            print(f'''
-
-            *****************************
-
-            Welcome {user_name.title()}''')
-
-            acc_cred = Credentials.find_credentials(user_name)
-
-            if acc_cred:
-               for credential in Credentials.credentials_list:
-                  print(f"")
-
+               pass_word = getpass.getpass()
+               print(User.user_list)
             else:
-               print('''
-               You don't have any credentials saved
+               print("Oops! There's no account going by that username.")
+ 
+         else:
+            print("""Create a new account
+            ________________________________________
+            """)
+            print("Enter a username:")
 
-               *****
+            user_name = input()
 
-               Create new credentials
-               ''')
+            if len(user_name) > 1:
+               print("Enter a password")
 
-               print("Enter account name (Twitter, Instagram, Github, etc):")
+               pass_word = getpass.getpass()
 
-               acc_name = input()
+               print("Confirm password")
 
-               print("Enter your chosen username:")
+               pass_confirm = getpass.getpass()
 
-               acc_username = input()
+               if pass_word == pass_confirm:
+                  create_user(user_name,pass_word)
 
-               print("""
-               To enter your own password, enter 'a'.
-               To have us generate a password for you, press any key then enter to have it generated for you""")
+                  print(f'''
 
-               action_cmd = input()
+                  *****************************
 
-               if action_cmd == 'a':
-                  input("Enter a password. Ensure it's long enough")
+                  Welcome {user_name.title()}''')
 
-                  pass_word = input()
+                  acc_cred = Credentials.find_credentials(user_name)
 
-                  print(f"Here is your password: {pass_word}")
-               else:
-                  print("Please enter your desired password length. We advice greater than 8")
+                  if acc_cred:
+                     for credential in Credentials.credentials_list:
+                        print(f"")
 
-                  length = input()
+                  else:
+                     print('''
+                     You don't have any credentials saved
 
-                  pass_word = generate_pass(length)
-                  print(f"Here's your password: {pass_word}")
+                     *****
 
-                  Credentials.display_credentials()
+                     Create new credentials
+                     ''')
 
-                  print('\n')
+                     print("Enter account name (Twitter, Instagram, Github, etc):")
 
-print(generate_pass(15))
+                     acc_name = input()
+
+                     print("Enter your chosen username:")
+
+                     acc_user = input()
+
+                     print("""
+                     To enter your own password, enter 'a'.
+                     To have us generate a password for you, press any key then enter to have it generated for you""")
+
+                     action_cmd = input()
+
+                     if action_cmd == 'a':
+                        input("Enter a password. Ensure it's long enough")
+
+                        pass_word = input()
+
+                        print(f"Here is your password: {pass_word}")
+
+                        save_credentials(create_credentials(user_name,acc_name,acc_user,pass_word))
+
+                        print(disp_cred())
+
+                        print('\n')
+                     else:
+                        print("Please enter your desired password length. We advice greater than 8")
+
+                        length = int(input())
+
+                        pass_word = generate_pass(length)
+                        print(f"Here's your password: {pass_word}")
+
+                        save_credentials(create_credentials(user_name,acc_name,acc_user,pass_word))
+
+                        print(disp_cred())
+
+                        print('\n')
+
+
+   
+print(log_in())
