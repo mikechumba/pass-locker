@@ -9,12 +9,12 @@ class TestCredentials(unittest.TestCase):
 
    def setUp(self):
       
-      self.new_credentials = Credentials("Instagram","michael", "password") # create contact object
+      self.new_credentials = Credentials("michael","Instagram","michael", "password") # create contact object
 
 
    def test_init(self):
       
-
+      self.assertEqual(self.new_credentials.username,"michael")
       self.assertEqual(self.new_credentials.account,"Instagram")
       self.assertEqual(self.new_credentials.acc_credentialsname,"michael")
       self.assertEqual(self.new_credentials.acc_password,"password")
@@ -35,7 +35,7 @@ class TestCredentials(unittest.TestCase):
       check if a credentials account can hold multiple credentials
       '''
       self.new_credentials.save_credentials()
-      test_credentials = Credentials("Twitter","michael","password") 
+      test_credentials = Credentials("michael","Twitter","michael","password") 
       test_credentials.save_credentials()
       self.assertEqual(len(Credentials.credentials_list),2)
 
@@ -45,7 +45,7 @@ class TestCredentials(unittest.TestCase):
       test_delete_credentials to test if we can remove a credentials from our credentials list
       '''
       self.new_credentials.save_credentials()
-      test_credentials = Credentials("Instagram", "michael", "password")
+      test_credentials = Credentials("michael","Instagram", "michael", "password")
       test_credentials.save_credentials()
 
       self.new_credentials.delete_credentials()
