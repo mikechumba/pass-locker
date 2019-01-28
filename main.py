@@ -107,9 +107,27 @@ def log_in():
                acc_username = input()
 
                print("""
-               To enter your own password, enter 'pass'.
-               To have us generate a password for you, enter 'gen'""")
+               To enter your own password, enter 'a'.
+               To have us generate a password for you, press any key then enter to have it generated for you""")
 
-               if()
-               
+               action_cmd = input()
+
+               if action_cmd == 'a':
+                  input("Enter a password. Ensure it's long enough")
+
+                  pass_word = input()
+
+                  print(f"Here is your password: {pass_word}")
+               else:
+                  print("Please enter your desired password length. We advice greater than 8")
+
+                  length = input()
+
+                  pass_word = generate_pass(length)
+                  print(f"Here's your password: {pass_word}")
+
+                  Credentials.display_credentials()
+
+                  print('\n')
+
 print(generate_pass(15))
