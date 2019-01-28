@@ -46,12 +46,27 @@ def disp_cred():
       ________________________________________ 
       '''
 
+
+def find_cred(cred):
+   '''
+   Method to find specific credential
+   '''
+
+   Credentials.find_credentials(cred)
+
+
+def del_cred(credential):
+   '''
+   Method to delete credentials
+   '''
+
+   Credentials.delete_credentials(credential)
+
 def del_user(user):
    '''
    Function to delete a User
    '''
    User.delete_user(user)
-
 
 # def find_user(number):
 #     '''
@@ -72,6 +87,130 @@ def generate_pass(length):
       pass_word += character
 
    return pass_word
+
+
+# functions to reusable conditions
+
+def in_profile():
+
+   while True:
+      acc_cred = Credentials.find_credentials(user_name)
+
+      if acc_cred:
+      
+         print(disp_cred())
+         print('''
+         To edit credentials, enter 'edit'.
+         To add new credentials, enter 'new'.
+         To delete credential, enter 'del'.
+         To exit , type 'exit'.
+         ''')
+
+         choice = input()
+
+         if choice == 'edit':
+            print("Enter name of account, i.e Twitter")
+            cred_name = input().title()
+            find_cred(cred_name)
+
+         elif choice == 'new':
+
+            print("Enter account name (Twitter, Instagram, Github, etc):")
+
+            acc_name = input()
+
+            print("Enter your chosen username:")
+
+            acc_user = input()
+
+            print("""
+            To enter your own password, enter 'me'.
+            To have us generate a password for you, press any key then enter to have it generated for you""")
+
+            action_cmd = input()
+
+            if action_cmd == 'me':
+               input("Enter a password. Ensure it's long enough")
+
+               pass_word = input()
+
+               print(f"You've succesfully created new credentials. Here is your password: {pass_word}.")
+
+               save_credentials(create_credentials(user_name,acc_name,acc_user,pass_word))
+
+               print(disp_cred())
+
+               print('\n')
+            else:
+               print("Please enter your desired password length. We advice greater than 8")
+
+               length = int(input())
+
+               pass_word = generate_pass(length)
+               print(f"You've succesfully created new credentials. Here's your password: {pass_word}")
+
+               save_credentials(create_credentials(user_name,acc_name,acc_user,pass_word))
+
+               print(disp_cred())
+
+               print('\n')
+
+         elif choice == 'del':
+            print('Enter the name of the account whose credentials you want to delete:')
+            cred_name = input()
+            del_cred(cred_name)
+
+      else:
+         print('''
+         You don't have any credentials saved
+
+         *****
+
+         Create new credentials
+         ''')
+
+         print("Enter account name (Twitter, Instagram, Github, etc):")
+
+         acc_name = input()
+
+         print("Enter your chosen username:")
+
+         acc_user = input()
+
+         print("""
+         To enter your own password, enter 'me'.
+         To have us generate a password for you, press any key then enter to have it generated for you""")
+
+         action_cmd = input()
+
+         if action_cmd == 'me':
+            input("Enter a password. Ensure it's long enough")
+
+            pass_word = input()
+
+            print(f"Here is your password: {pass_word}")
+
+            save_credentials(create_credentials(user_name,acc_name,acc_user,pass_word))
+
+            print(disp_cred())
+
+            print('\n')
+         else:
+            print("Please enter your desired password length. We advice greater than 8")
+
+            length = int(input())
+
+            pass_word = generate_pass(length)
+            print(f"Here's your password: {pass_word}")
+
+            save_credentials(create_credentials(user_name,acc_name,acc_user,pass_word))
+
+            print(disp_cred())
+
+            print('\n')
+
+
+# main funtion that performs all the user actions
 
 def log_in():
 
@@ -101,7 +240,11 @@ def log_in():
                print(f"Enter the password for {user_name}:")
 
                pass_word = getpass.getpass()
-               print(User.user_list)
+               
+               
+
+
+
             else:
                print("Oops! There's no account going by that username.")
  
@@ -133,58 +276,122 @@ def log_in():
 
                   acc_cred = Credentials.find_credentials(user_name)
 
-                  if acc_cred:
-                     for credential in Credentials.credentials_list:
-                        print(f"")
+                  while True:
 
-                  else:
-                     print('''
-                     You don't have any credentials saved
+                     acc_cred = Credentials.find_credentials(user_name)
 
-                     *****
-
-                     Create new credentials
-                     ''')
-
-                     print("Enter account name (Twitter, Instagram, Github, etc):")
-
-                     acc_name = input()
-
-                     print("Enter your chosen username:")
-
-                     acc_user = input()
-
-                     print("""
-                     To enter your own password, enter 'a'.
-                     To have us generate a password for you, press any key then enter to have it generated for you""")
-
-                     action_cmd = input()
-
-                     if action_cmd == 'a':
-                        input("Enter a password. Ensure it's long enough")
-
-                        pass_word = input()
-
-                        print(f"Here is your password: {pass_word}")
-
-                        save_credentials(create_credentials(user_name,acc_name,acc_user,pass_word))
-
+                     if acc_cred:
+                     
                         print(disp_cred())
+                        print('''
+                        To edit credentials, enter 'edit'.
+                        To add new credentials, enter 'new'.
+                        To delete credential, enter 'del'.
+                        To exit , type 'exit'.
+                        ''')
 
-                        print('\n')
+                        choice = input()
+
+                        if choice == 'edit':
+                           print("Enter name of account, i.e Twitter")
+                           cred_name = input().title()
+                           find_cred(cred_name)
+
+                        elif choice == 'new':
+
+                           print("Enter account name (Twitter, Instagram, Github, etc):")
+
+                           acc_name = input()
+
+                           print("Enter your chosen username:")
+
+                           acc_user = input()
+
+                           print("""
+                           To enter your own password, enter 'me'.
+                           To have us generate a password for you, press any key then enter to have it generated for you""")
+
+                           action_cmd = input()
+
+                           if action_cmd == 'me':
+                              input("Enter a password. Ensure it's long enough")
+
+                              pass_word = input()
+
+                              print(f"You've succesfully created new credentials. Here is your password: {pass_word}.")
+
+                              save_credentials(create_credentials(user_name,acc_name,acc_user,pass_word))
+
+                              print(disp_cred())
+
+                              print('\n')
+                           else:
+                              print("Please enter your desired password length. We advice greater than 8")
+
+                              length = int(input())
+
+                              pass_word = generate_pass(length)
+                              print(f"You've succesfully created new credentials. Here's your password: {pass_word}")
+
+                              save_credentials(create_credentials(user_name,acc_name,acc_user,pass_word))
+
+                              print(disp_cred())
+
+                              print('\n')
+
+                        elif choice == 'del':
+                           print('Enter the name of the account whose credentials you want to delete:')
+                           cred_name = input()
+                           del_cred(cred_name)
+
                      else:
-                        print("Please enter your desired password length. We advice greater than 8")
+                        print('''
+                        You don't have any credentials saved
 
-                        length = int(input())
+                        *****
 
-                        pass_word = generate_pass(length)
-                        print(f"Here's your password: {pass_word}")
+                        Create new credentials
+                        ''')
 
-                        save_credentials(create_credentials(user_name,acc_name,acc_user,pass_word))
+                        print("Enter account name (Twitter, Instagram, Github, etc):")
 
-                        print(disp_cred())
+                        acc_name = input()
 
-                        print('\n')
+                        print("Enter your chosen username:")
+
+                        acc_user = input()
+
+                        print("""
+                        To enter your own password, enter 'me'.
+                        To have us generate a password for you, press any key then enter to have it generated for you""")
+
+                        action_cmd = input()
+
+                        if action_cmd == 'me':
+                           input("Enter a password. Ensure it's long enough")
+
+                           pass_word = input()
+
+                           print(f"Here is your password: {pass_word}")
+
+                           save_credentials(create_credentials(user_name,acc_name,acc_user,pass_word))
+
+                           print(disp_cred())
+
+                           print('\n')
+                        else:
+                           print("Please enter your desired password length. We advice greater than 8")
+
+                           length = int(input())
+
+                           pass_word = generate_pass(length)
+                           print(f"Here's your password: {pass_word}")
+
+                           save_credentials(create_credentials(user_name,acc_name,acc_user,pass_word))
+
+                           print(disp_cred())
+
+                           print('\n')
 
 
    
