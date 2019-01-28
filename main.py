@@ -29,10 +29,10 @@ def generate_pass(length):
 
    characters = ['1','2','3','4','5','6','7','8','9','0','a','b','c','d','e','m','n','o','p','.','-','$','@']
 
-   index = random.randint(0,23)
    pass_word = ''
 
-   for len(pass_word) < length:
+   while (len(pass_word) < length):
+      index = random.randint(0,23)
       character = characters[index]
       pass_word += character
 
@@ -105,5 +105,11 @@ def log_in():
                print("Enter your chosen username:")
 
                acc_username = input()
+
+               print("""
+               To enter your own password, enter 'pass'.
+               To have us generate a password for you, enter 'gen'""")
+
+               if()
                
-print(generate_pass())
+print(generate_pass(15))
