@@ -1,13 +1,14 @@
 from user_class import User
 from credentials import Credentials
 import getpass
+import random
 
 def create_user(username,password):
-    '''
-    Function to create a new User
-    '''
-    new_user = User(username,password)
-    return new_user
+   '''
+   Function to create a new User
+   '''
+   new_user = User(username,password)
+   return new_user
 
 
 def del_user(user):
@@ -23,9 +24,23 @@ def del_user(user):
 #     '''
 #     return User.find_by_number(number)
 
+
+def generate_pass(length):
+
+   characters = ['1','2','3','4','5','6','7','8','9','0','a','b','c','d','e','m','n','o','p','.','-','$','@']
+
+   index = random.randint(0,23)
+   pass_word = ''
+
+   for len(pass_word) < length:
+      character = characters[index]
+      pass_word += character
+
+   return pass_word
+
 def log_in():
 
-   print("Do you have an account? Y/n")
+   print("Do you have a Password Locker account? Y/n")
 
    has_account = input()
 
@@ -66,10 +81,29 @@ def log_in():
 
             *****************************
 
-            Welcome {user_name}''')
-   
+            Welcome {user_name.title()}''')
 
-print(log_in())
+            acc_cred = Credentials.find_credentials(user_name)
 
-   
+            if acc_cred:
+               for credential in Credentials.credentials_list:
+                  print(f"")
 
+            else:
+               print('''
+               You don't have any credentials saved
+
+               *****
+
+               Create new credentials
+               ''')
+
+               print("Enter account name (Twitter, Instagram, Github, etc):")
+
+               acc_name = input()
+
+               print("Enter your chosen username:")
+
+               acc_username = input()
+               
+print(generate_pass())

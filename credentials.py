@@ -7,7 +7,6 @@ class Credentials:
    credentials_list = []
 
    def save_credentials(self):
-
       '''
       This method saves credentials in the credentials_list
       '''
@@ -15,23 +14,21 @@ class Credentials:
       Credentials.credentials_list.append(self)
 
    def delete_credentials(self):
-
       '''
       This will delete saved credentials from credentials_list
       '''
 
       Credentials.credentials_list.remove(self)
 
-
    @classmethod
-   def find_credentials(cls,string):
+   def find_credentials(cls, string):
       '''
       this method accesses credentials in credentials_list
       '''
 
       for credential in cls.credentials_list:
-         if credential.account == string:
-            return credential
+         if credential.username == string:
+               return credential
 
    @classmethod
    def display_credentials(cls):
@@ -40,9 +37,7 @@ class Credentials:
       '''
       return cls.credentials_list
 
-
-   def __init__(self,username,account,acc_credentialsname,acc_password):
-
+   def __init__(self, username, account, acc_credentialsname, acc_password):
       '''
       Will define properties for this class
       '''
