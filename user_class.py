@@ -24,6 +24,16 @@ class User:
 
       User.user_list.remove(self)
 
+   @classmethod
+   def find_user(cls, string):
+      '''
+      this method accesses credentials in credentials_list
+      '''
+
+      for user in cls.user_list:
+         if user.username == string:
+               return user
+
    def __init__(self,username,password):
 
       '''
