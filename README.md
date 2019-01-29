@@ -28,6 +28,19 @@ If you feel like using this project as your own you can do so, following the ins
 
 This project requires that you have python 3.6+ set up. You can follow the instructions [here]('https://realpython.com/installing-python/') to achieve that, if you haven't
 
+### Running The Project
+
+To run the project simply go to the projects folder using a bash terminal
+
+- `cd .../pass-locker`
+
+Assuming you have python installed,
+
+- Enter `python main.py` in Windows, and `python3.7 main.py` in Linux.
+- Enter `ctrl+Z` to exit the code.
+
+For Visual Studio Code users, the settings for my workspace can be found in the .vscode folder
+
 ### Debugging
 
 This app doesn't seem to have any bugs for now. If you happen to come across one, I will be happy to take a look at it. Contact Me on:

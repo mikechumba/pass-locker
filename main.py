@@ -38,7 +38,7 @@ def disp_cred(name):
    '''
 
    # return Credentials.display_credentials()
-
+   
    for credential in Credentials.credentials_list:
       if credential.username == name:
          return f'''
@@ -179,7 +179,9 @@ def log_in():
 
                      acc_name = input('\n').title()
 
-                     del_cred(acc_name)
+                     for credential in Credentials.credentials_list:
+                        if credential.account == acc_name:
+                           del credential
 
                   elif user_input == 'out':
                      break
