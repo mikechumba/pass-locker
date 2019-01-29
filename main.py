@@ -36,8 +36,9 @@ def disp_cred(name):
    '''
    Function to display saved credentials
    '''
+   cred = Credentials.display_credentials()
 
-   for credential in Credentials.credentials_list:
+   for credential in cred:
       if credential.username == name:
          return f'''
          ________________________________________
