@@ -108,6 +108,12 @@ def log_in():
       user_input = input()
 
       if user_input == 'l':
+         print('''
+             ****
+         Account log in.
+
+             ****
+         ''')
          print('Enter your username:')
          user_name = input()
 
@@ -194,11 +200,23 @@ def log_in():
                      break
 
             else:
-               print('\n')
                print("The username or password you entered isn't valid.")
                user_input = 's'
 
       elif user_input == 's':
+         print('''
+                 ****
+         Sign up for an account.
+
+         ______________________
+         
+                 ****
+
+         After creating your account you'll be taken to the main page where you can log in using your sign up details.
+
+         ----
+         ''')
+
          print('Enter your username:')
          user_name = input()
 
