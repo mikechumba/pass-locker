@@ -37,8 +37,6 @@ def disp_cred(name):
    Function to display saved credentials
    '''
 
-   # return Credentials.display_credentials()
-   
    for credential in Credentials.credentials_list:
       if credential.username == name:
          return f'''
@@ -53,7 +51,15 @@ def find_cred(cred):
    Method to find specific credential
    '''
 
-   Credentials.find_credentials(cred)
+   credential = Credentials.find_credentials(cred)
+
+   return f'''
+              ******
+   Your search for {cred} returned:
+   _________________________________
+   {credential.account.title()}  |  {credential.acc_credentialsname}  |  {credential.acc_password}
+   _________________________________
+   '''
 
 
 def del_cred(credential):
@@ -181,7 +187,7 @@ def log_in():
 
                      for credential in Credentials.credentials_list:
                         if credential.account == acc_name:
-                           del credential
+                           del_cred(credential)
 
                   elif user_input == 'out':
                      break
@@ -204,6 +210,9 @@ def log_in():
              ***
          Sign up successful.
          ''')
+
+      elif user_input == 'exit':
+         exit()
 
    
 

@@ -13,12 +13,12 @@ class Credentials:
 
       Credentials.credentials_list.append(self)
 
-   def delete_credentials(acc):
+   def delete_credentials(self):
       '''
       This will delete saved credentials from credentials_list
       '''
 
-      Credentials.credentials_list.remove(acc)
+      Credentials.credentials_list.remove(self)
 
    @classmethod
    def find_credentials(cls, string):
