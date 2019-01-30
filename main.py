@@ -77,7 +77,7 @@ def del_user(user):
    User.delete_user(user)
 
 
-def generate_pass(length):
+def generate_pass(length = 8):
 
    characters = ['1','2','3','4','5','6','7','8','9','0','a','b','c','d','e','m','n','o','p','.','-','$','@']
 
@@ -149,7 +149,7 @@ def log_in():
                   if user_input == 'new':
                      print("Enter account name (Twitter, Instagram, Github, etc):")
 
-                     acc_name = input()
+                     acc_name = input().title()
 
                      print("Enter your chosen username:")
 
@@ -173,12 +173,21 @@ def log_in():
                      else:
                         print("Please enter your desired password length. We advice greater than 8")
 
-                        length = int(input())
+                        length = input()
 
-                        pass_word = generate_pass(length)
-                        print(f"You've succesfully created new credentials. Here's your password: {pass_word}")
+                        if length == '':
+                           length = 8
+                                                   
+                           pass_word = generate_pass(int(length))
+                           print(f"You've succesfully created new credentials. Here's your password: {pass_word}")
 
-                        save_credentials(create_credentials(user_name,acc_name,acc_user,pass_word))
+                           save_credentials(create_credentials(user_name,acc_name,acc_user,pass_word))
+                        else:
+                           pass_word = generate_pass(int(length))
+                           print(f"You've succesfully created new credentials. Here's your password: {pass_word}")
+
+                           save_credentials(create_credentials(user_name,acc_name,acc_user,pass_word))
+
 
                   elif user_input == 'find':
                      print("Enter name of the account you want to find:")
@@ -195,11 +204,19 @@ def log_in():
                      for credential in Credentials.credentials_list:
                         if credential.account == acc_name:
                            del_cred(credential)
-
+                           print(f'''
+                           You have successfully deleted the credentials for {acc_name}.
+                           ''')
+                        else:
+                           print(f'''
+                           {acc_name} doesn't exist in your saved credentials.
+                           ''')
+                     
                   elif user_input == 'out':
                      break
 
             else:
+
                print("The username or password you entered isn't valid.")
                user_input = 's'
 
