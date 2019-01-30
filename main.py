@@ -70,12 +70,6 @@ def del_cred(credential):
 
    Credentials.delete_credentials(credential)
 
-def del_user(user):
-   '''
-   Function to delete a User
-   '''
-   User.delete_user(user)
-
 
 def generate_pass(length = 8):
 
@@ -192,10 +186,15 @@ def log_in():
                   elif user_input == 'find':
                      print("Enter name of the account you want to find:")
 
-                     acc_name = input('\n')
-
-                     print(find_cred(acc_name))
-
+                     acc_name = input('\n').title()
+                     for credential in Credentials.credentials_list:
+                        if credential.account == acc_name:
+                           print(find_cred(acc_name))
+                        else:
+                           print('''
+                                      !!!
+                           There are no such credentials saved.''')
+                        
                   elif user_input == 'del':
                      print('Enter name of account you want to delete:')
 
